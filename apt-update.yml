@@ -1,9 +1,9 @@
 ---
-- name: Run apt update and upgrade packages
+- name: Update and upgrade packages
   hosts: all
   become: true
   tasks:
-    - name: Update and upgrade using shell
+    - name: Run apt update and upgrade
       shell: "apt update && apt upgrade -y"
       args:
         warn: false
