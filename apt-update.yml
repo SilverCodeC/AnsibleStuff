@@ -1,9 +1,5 @@
----
-- name: Update and upgrade packages
-  hosts: all
-  become: true
-  tasks:
-    - name: Run apt update and upgrade
-      shell: "apt update && apt upgrade -y"
-      args:
-        warn: false
+- name: Update apt cache and upgrade packages
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: dist
