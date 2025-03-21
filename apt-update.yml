@@ -6,3 +6,7 @@
       apt:
         update_cache: yes
         upgrade: dist
+
+    - name: Display the host's name
+      debug:
+        msg: "The hostname is: {{ ansible_hostname }}"
