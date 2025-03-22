@@ -15,9 +15,6 @@
 - name: INFO
   hosts: all
   tasks:
-    - name: Gather all system facts
-      setup:
-
     - name: Display CPU information
       debug:
         msg: "CPU Model: {{ ansible_processor[0] }}"
