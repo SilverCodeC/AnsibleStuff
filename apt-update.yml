@@ -10,3 +10,11 @@
     - name: Display the host's name
       debug:
         msg: "HOSTNAME : {{ ansible_hostname }}"
+- name: Gather and display all facts
+  hosts: all
+  tasks:
+    - name: Gather all facts
+      setup:
+    - name: Display facts
+      debug:
+        var: ansible_facts
