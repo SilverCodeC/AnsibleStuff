@@ -10,13 +10,26 @@
     - name: Display the host's name
       debug:
         msg: "HOSTNAME : {{ ansible_hostname }}"
-- name: Show disk usage using df -h
+
+
+- name: Display PC Components: CPU, Cores, RAM, and OS
   hosts: all
   tasks:
-    - name: Run df -h to check disk usage
-      command: df -h
-      register: disk_usage
+    - name: Gather all system facts
+      setup:
 
-    - name: Display disk usage output
+    - name: Display CPU information
       debug:
-        msg: "{{ disk_usage.stdout }}"
+        msg: "CPU Model: {{ ansible_processor[0] }}"
+
+    - name: Display number of CPU cores
+      debug:
+        msg: "CPU Cores: {{ ansible_processor_cores | default(ansible_processor_vcpus) }}"
+
+    - name: Display total memory
+      debug:
+        msg: "Total Memory (MB): {{ ansible_memtotal_mb }}"
+
+    - name: Display operating system information
+      debug:
+        msg: "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
