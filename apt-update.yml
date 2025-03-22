@@ -9,4 +9,4 @@
 
     - name: Display the host's name
       debug:
-        msg: "hostname > {{ ansible_hostname }}"
+        msg: "HOSTNAME : {{ ansible_hostname }}"
