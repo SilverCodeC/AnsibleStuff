@@ -12,7 +12,7 @@
         msg: "HOSTNAME : {{ ansible_hostname }}"
 
 
-- name: Display PC Components: CPU, Cores, RAM, and OS
+- name: INFO
   hosts: all
   tasks:
     - name: Gather all system facts
