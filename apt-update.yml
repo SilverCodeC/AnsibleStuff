@@ -18,9 +18,18 @@
     - name: Gather all system facts
       setup:
 
-    - name: Display Information
+    - name: Display CPU information
       debug:
         msg: "CPU Model: {{ ansible_processor[0] }}"
+
+    - name: Display number of CPU cores
+      debug:
         msg: "CPU Cores: {{ ansible_processor_cores | default(ansible_processor_vcpus) }}"
+
+    - name: Display total memory
+      debug:
         msg: "Total Memory (MB): {{ ansible_memtotal_mb }}"
+
+    - name: Display operating system information
+      debug:
         msg: "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
