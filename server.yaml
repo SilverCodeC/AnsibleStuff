@@ -35,9 +35,15 @@
 - hosts: css
   become: false   # no sudo needed
   tasks:
-    - name: Start Css server as cssserver duh
-      ansible.builtin.shell: ./cssserver start
+    - name: Check if Css server is running
+      ansible.builtin.command: ./cssserver status
       args:
         chdir: /home/cssserver
-      # Only run if the remote user is gmodserver
-      when: ansible_user == 'cssserver'
+      register: css_status
+      ignore_errors: true
+
+    - name: Start Css server if not running
+      ansible.builtin.command: ./cssserver start
+      args:
+        chdir: /home/cssserver
+      when: csss_status.rc != 0
