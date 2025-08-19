@@ -17,13 +17,19 @@
       
 - hosts: cs2
   become: false   # no sudo needed
-  tasks:
-    - name: Start Cs2 server as cs2server duh
-      ansible.builtin.shell: ./cs2server start
+    tasks:
+    - name: Check if Cs2 server is running
+      ansible.builtin.command: ./cs2server status
       args:
         chdir: /home/cs2server
-      # Only run if the remote user is gmodserver
-      when: ansible_user == 'cs2server'
+      register: cs2_status
+      ignore_errors: true
+
+    - name: Start Cs2 server if not running
+      ansible.builtin.command: ./cs2server start
+      args:
+        chdir: /home/cs2server
+      when: cs2_status.rc != 0
 
 
 - hosts: css
