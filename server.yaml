@@ -1,13 +1,18 @@
 - hosts: gmod
   become: false   # no sudo needed
-  tasks:
-    - name: Start GMod server as gmodserver
+   tasks:
+    - name: Check if GMod server is running
+      ansible.builtin.shell: ./gmodserver status | grep "RUNNING"
+      args:
+        chdir: /home/gmodserver
+      register: gmod_status
+      ignore_errors: true
+
+    - name: Start GMod server if not running
       ansible.builtin.shell: ./gmodserver start
       args:
         chdir: /home/gmodserver
-      # Only run if the remote user is gmodserver
-      when: ansible_user == 'gmodserver'
-
+      when: gmod_status.rc != 0
       
 - hosts: cs2
   become: false   # no sudo needed
