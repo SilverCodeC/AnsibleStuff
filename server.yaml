@@ -17,7 +17,7 @@
       
 - hosts: cs2
   become: false   # no sudo needed
-    tasks:
+  tasks:
     - name: Check if Cs2 server is running
       ansible.builtin.command: ./cs2server status
       args:
