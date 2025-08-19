@@ -18,3 +18,14 @@
         chdir: /home/cs2server
       # Only run if the remote user is gmodserver
       when: ansible_user == 'cs2server'
+
+
+- hosts: css
+  become: false   # no sudo needed
+  tasks:
+    - name: Start Css server as cssserver duh
+      ansible.builtin.shell: ./cssserver start
+      args:
+        chdir: /home/cssserver
+      # Only run if the remote user is gmodserver
+      when: ansible_user == 'cssserver'
