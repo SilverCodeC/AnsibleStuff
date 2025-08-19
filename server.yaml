@@ -2,7 +2,7 @@
   become: false
   tasks:
     - name: Check if GMod server is running
-      ansible.builtin.command: ./gmodserver status
+      ansible.builtin.command: ./gmodserver monitor
       args:
         chdir: /home/gmodserver
       register: gmod_status
@@ -19,7 +19,7 @@
   become: false   # no sudo needed
   tasks:
     - name: Check if Cs2 server is running
-      ansible.builtin.command: ./cs2server status
+      ansible.builtin.command: ./cs2server monitor
       args:
         chdir: /home/cs2server
       register: cs2_status
@@ -36,7 +36,7 @@
   become: false   # no sudo needed
   tasks:
     - name: Check if Css server is running
-      ansible.builtin.command: ./cssserver status
+      ansible.builtin.command: ./cssserver monitor
       args:
         chdir: /home/cssserver
       register: css_status
