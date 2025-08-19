@@ -46,4 +46,4 @@
       ansible.builtin.command: ./cssserver start
       args:
         chdir: /home/cssserver
-      when: csss_status.rc != 0
+      when: css_status.rc != 0
