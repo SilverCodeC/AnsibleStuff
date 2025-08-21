@@ -52,12 +52,11 @@
 
 - name: Ensure app.py is running in background on ytd
   hosts: ytd
-  become: false
+  become: true
   tasks:
     - name: Check if app.py is already running
-      shell: pgrep -f "python3 ./app.py"
-      args:
-        chdir: /var/www/html
+      shell: |
+        cd /var/www/html && pgrep -x python3 | xargs -r ps -o args= -p | grep -q "python3 ./app.py"
       register: app_status
       ignore_errors: true
 
@@ -66,5 +65,6 @@
       args:
         chdir: /var/www/html
       when: app_status.rc != 0
+
       
 
