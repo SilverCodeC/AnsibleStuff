@@ -48,12 +48,20 @@
         chdir: /home/cssserver
       when: css_status.rc != 0
 
-- name: Youtube Downloader
+
+
+- name: Ensure app.py is running in background on ytd
   hosts: ytd
   become: true
   tasks:
-    - name: Run app.py in background
+    - name: Check if app.py is already running
+      shell: pgrep -f "python3 ./app.py"
+      register: app_status
+      ignore_errors: true
+
+    - name: Start app.py if not running
       shell: nohup python3 ./app.py > app.log 2>&1 &
       args:
         chdir: /var/www/html
+      when: app_status.rc != 0
 
