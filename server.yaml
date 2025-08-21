@@ -52,7 +52,7 @@
 
 - name: Ensure app.py is running in background on ytd
   hosts: ytd
-  become: true
+  become: false
   tasks:
     - name: Check if app.py is already running
       shell: pgrep -f "python3 ./app.py"
