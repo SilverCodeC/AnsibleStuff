@@ -56,6 +56,8 @@
   tasks:
     - name: Check if app.py is already running
       shell: pgrep -f "python3 ./app.py"
+      args:
+        chdir: /var/www/html
       register: app_status
       ignore_errors: true
 
