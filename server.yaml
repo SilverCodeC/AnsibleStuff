@@ -47,3 +47,13 @@
       args:
         chdir: /home/cssserver
       when: css_status.rc != 0
+
+- name: Youtube Downloader
+  hosts: ytd
+  become: true
+  tasks:
+    - name: Run app.py in background
+      shell: nohup python3 ./app.py > app.log 2>&1 &
+      args:
+        chdir: /var/www/html
+
