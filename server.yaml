@@ -15,38 +15,21 @@
       when: gmod_status.rc != 0
 
       
-- hosts: cs2
+- hosts: dayz
   become: false   # no sudo needed
   tasks:
-    - name: Check if Cs2 server is running
-      ansible.builtin.command: ./cs2server monitor
+    - name: Check if dayz server is running
+      ansible.builtin.command: ./dayzserver monitor
       args:
-        chdir: /home/cs2server
-      register: cs2_status
+        chdir: /home/dayzserver
+      register: dayz_status
       ignore_errors: true
 
-    - name: Start Cs2 server if not running
-      ansible.builtin.command: ./cs2server start
+    - name: Start Dayz server if not running
+      ansible.builtin.command: ./dayzserver start
       args:
-        chdir: /home/cs2server
-      when: cs2_status.rc != 0
-
-
-- hosts: css
-  become: false   # no sudo needed
-  tasks:
-    - name: Check if Css server is running
-      ansible.builtin.command: ./cssserver monitor
-      args:
-        chdir: /home/cssserver
-      register: css_status
-      ignore_errors: true
-
-    - name: Start Css server if not running
-      ansible.builtin.command: ./cssserver start
-      args:
-        chdir: /home/cssserver
-      when: css_status.rc != 0
+        chdir: /home/dayzserver
+      when: dayz_status.rc != 0
 
 
 
